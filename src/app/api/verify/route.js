@@ -6,28 +6,19 @@ export async function POST(req) {
   const results = [];
 
   for (const email of emails) {
-    try {
-      const { valid, reason } = await validateEmail({
-        email,
-        validateRegex: true,
-        validateMx: true,
-        validateTypo: true,
-        validateDisposable: true,
-        validateSMTP: true,
-        timeout: 15000,
-      });
+    const { valid, reason } = await validateEmail({
+      email,
+      validateSMTP: true,
+      validateDisposable: true,
+      timeout: 15000,
+    });
 
-      results.push({
-        email,
-        status: valid ? 'valid' : 'invalid',
-        reason: valid ? '' : (reason || 'failed SMTP check'),
-      });
-    } catch (err) {
-      results.push({ email, status: 'error', reason: 'timeout or blocked' });
-    }
+    results.push({
+      email,
+      status: valid ? 'valid' : 'invalid',
+      reason: valid ? '' : reason,
+    });
   }
 
   return Response.json(results);
 }
-
-export const runtime = 'edge';
