@@ -1,4 +1,4 @@
-import Verifier from './verifier.jsx'
+import Verifier from './verifier.jsx'   // ← must have .jsx at the end
 
 export default function Home() {
   return (
