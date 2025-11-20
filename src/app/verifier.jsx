@@ -20,7 +20,7 @@ export default function Verifier() {
       const data = await res.json();
       setResult(data[0]);
     } catch (e) {
-      setResult({ email, status: 'error', reason: 'Check console' });
+      setResult({ email, status: 'error', reason: 'API not connected' });
     }
     setLoading(false);
   };
@@ -29,7 +29,7 @@ export default function Verifier() {
     <div className="max-w-2xl mx-auto bg-gray-900 rounded-3xl p-10 shadow-2xl">
       <input
         type="email"
-        placeholder="Type any email here..."
+        placeholder="Enter email to verify..."
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="w-full p-6 rounded-xl bg-gray-800 text-white text-lg mb-6"
@@ -37,16 +37,16 @@ export default function Verifier() {
       <button
         onClick={verify}
         disabled={loading}
-        className="w-full bg-purple-600 py-6 rounded-xl font-bold text-2xl"
+        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 py-6 rounded-xl font-bold text-2xl"
       >
-        {loading ? 'Checking...' : 'Verify Email →'}
+        {loading ? 'Verifying...' : 'Verify Email →'}
       </button>
 
       {result && (
-        <div className={`mt-10 p-10 rounded-xl text-center ${result.status === 'valid' ? 'bg-green-900/50' : 'bg-red-900/50'}`}>
-          <p className="text-5xl font-bold">{result.status.toUpperCase()}</p>
-          <p className="text-2xl mt-4">{result.email}</p>
-          {result.reason && <p className="mt-4">Reason: {result.reason}</p>}
+        <div className={`mt-10 p-10 rounded-xl text-center ${result.status === 'valid' ? 'bg-green-900/50 border-green-500' : 'bg-red-900/50 border-red-500'} border-4`}>
+          <p className="text-6xl font-bold">{result.status === 'valid' ? 'VALID' : 'INVALID'}</p>
+          <p className="text-3xl mt-4">{result.email}</p>
+          {result.reason && <p className="mt-4 text-gray-300">Reason: {result.reason}</p>}
         </div>
       )}
     </div>
