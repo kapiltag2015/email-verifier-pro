@@ -1,4 +1,4 @@
-import Verifier from './verifier.jsx'   // ← must have .jsx at the end
+import Verifier from './verifier.jsx'
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
           Email Verifier Pro
         </h1>
         <p className="text-2xl text-gray-300 mb-16">
-          5000 free checks · Real SMTP verification · Made with ❤️ in India
+          5000 free checks · Real SMTP verification · Made in India 🇮🇳
         </p>
         <Verifier />
       </div>
